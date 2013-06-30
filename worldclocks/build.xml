@@ -1,0 +1,53 @@
+<?xml version="1.0" ?>
+<project default="deploy_yahoo">
+	<property name="projectname" value="WorldClocks"/>
+	<property name="build.username" value="user"/>
+	<property name="version" value="0.3"/>
+	<property name="bin" value="bin"/>
+	<property name="src" value="src"/>
+	<property name="tmp" value="tmp"/>
+	<property name="res" value="res"/>
+	<property name="yahoo_my_widgets" value="C:\Users\${build.username}\Documents\My Widgets"/>
+
+	<target name="test_package_yahoo" description="make package for yahoo! widget">
+		<property name="long" value="yahoo"/>
+		<property name="short" value="yw"/>
+		<zip destfile="${bin}/${projectname}_${short}_${version}.widget">
+			<fileset dir="${tmp}/${long}/" includes="Contents.widget/**"/>
+		</zip>
+	</target>
+	
+	<target name="package_yahoo" description="make package for yahoo! widget">
+		<property name="long" value="yahoo"/>
+		<property name="short" value="yw"/>
+		<property name="contents" value="${tmp}/${long}/Contents.widget/Contents"/>
+		<property name="target_lib" value="${contents}/lib"/>
+		<property name="target_res" value="${contents}/Resources"/>
+		
+		<mkdir dir="${tmp}"/>
+		<mkdir dir="${tmp}/${long}"/>
+		<mkdir dir="${tmp}/${long}/Contents.widget"/>
+		<mkdir dir="${tmp}/${long}/Contents.widget/Contents"/>
+		
+		<copy todir="${contents}">
+		 	<fileset dir="${src}/${long}"/>
+		</copy>
+		
+		<mkdir dir="${target_res}"/>
+		<copy todir="${target_res}">
+		 	<fileset dir="${res}/common"/>
+		 	<fileset dir="${res}/${long}"/>
+		</copy>
+		
+		<mkdir dir="${bin}"/>
+		<zip destfile="${bin}/${projectname}_${short}_${version}.widget">
+			<fileset dir="${tmp}/${long}/" includes="Contents.widget/**"/>
+		</zip>
+	</target>
+	
+	<target name="deploy_yahoo" description="deploy for yahoo! widget" depends="package_yahoo">
+		<copy todir="${yahoo_my_widgets}">
+			<fileset dir="${bin}" includes="*.widget"/>
+		</copy>
+	</target>
+</project>

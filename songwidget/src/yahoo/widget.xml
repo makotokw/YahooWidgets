@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+  <name>SongWidget</name>
+  <version>0.3.1</version>
+  <identifier>{7C9A6F27-FEE6-4632-A710-40405736E1A4}</identifier>
+  <image usage="dock" src="Resources/DocInactive.png"/>
+  <image usage="security" src="Resources/DocDefault.png"/>
+  <author name="makoto_kw" href="http://trac.makotokw.com"/>
+  <copyright>(c) 2006-2008 makoto_kw. (makoto.kw@gmail.com) </copyright>
+</metadata>

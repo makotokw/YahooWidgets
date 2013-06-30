@@ -1,0 +1,14 @@
+
+"HOT_KEYWORD" = "注目キーワード";
+"CANNOT_ACCESS" = "アクセスできません";
+"REFRESH" = "更新";
+"PROJECT_URL" = "プロジェクトサイト";
+
+"DATA_LOADING" = "読み込み中...";
+
+"VERSIONCHECK_MENU" = "ウィジェットの更新をチェック";
+"CHECKUPDATEDLG_TITLE1" = "%2 のバージョン %1 が公開されています。(現在のバージョンは %3 です) \nウィジェットを終了しリリースページを表示しますか?";
+"CHECKUPDATEDLG_TITLE2" = "このバージョンは最新バージョンです";
+"CHECKUPDATEDLG_BTN1"  = "はい";
+"CHECKUPDATEDLG_BTN2"  = "いいえ";
+"PREF_VERSIONCHECK_TITLE" = "起動時にウィジェットの更新をチェックする";

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dock-item version="1.0">
+  <image id="bg" src="Resources/DocActive.png"/> 
+  <text id="keyword1" hAlign="center" vOffset="30" data="" width="70" wrap="false"/>
+  <text id="keyword2" hAlign="center" vOffset="45" data="loading..." width="70" wrap="false"/>
+  <text id="keyword3" hAlign="center" vOffset="60" data="" width="70" wrap="false"/>
+</dock-item>

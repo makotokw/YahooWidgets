@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<name>My Google Calenadar</name>
+	<version>1.0.3</version>
+	<identifier>com.makotkw.widget.mygooglecalendar</identifier>
+	<image usage="dock" src="Resources/DocDefault.png"/>
+	<image usage="security" src="Resources/DocDefault.png"/>
+	<author name="makoto_kw" href="http://projects.makotokw.com"/>
+	<copyright>(c) 2009 makoto_kw. (makoto.kw@gmail.com) </copyright>
+	<description>Google Calenadar for Yahoo! Widget.</description>
+	<platform minVersion="4.5"/>
+	<security>
+		<http name="makotokw.com">makotokw.com</http>
+		<http name="google.com">google.com</http>
+		<filesystem>user</filesystem>
+	</security>
+</metadata>

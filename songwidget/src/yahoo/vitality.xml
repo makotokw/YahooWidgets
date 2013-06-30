@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dock-item version="1.0">
+  <image id="bg" src="Resources/DocActive.png"/> 
+  <text id="artist" hAlign="center" vOffset="25" data="" width="70" wrap="false" style="font-family:'Verdana';font-size:8px;color:black; -kon-shadow: 1px 1px rgb(255,255,255)"/>
+  <text id="album" hAlign="center" vOffset="40" data="loading..." width="70" wrap="false" style="font-family:'Verdana';font-size:8px;color:black; -kon-shadow: 1px 1px rgb(255,255,255)"/>
+  <text id="track" hAlign="center" vOffset="55" data="" width="70" wrap="false" style="font-family:'Verdana';font-size:8px;color:black; -kon-shadow: 1px 1px rgb(255,255,255)"/>
+</dock-item>

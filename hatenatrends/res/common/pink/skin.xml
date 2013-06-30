@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hhkskin version="1.0">
+  <window>
+    <background>
+      <scrollbar thumbColor="#FF00FF"/>
+      <font type="Helvetica Bold, Arial" size="11" normal="#111111" active="#FF00FF"/>
+      <titlefont type="Helvetica Bold, Arial" size="12" normal="#ffffff" active="#ff9900"/>
+      <image>Panel_UpperLeft.png</image>
+      <image>Panel_UpperRight.png</image>
+      <image>Panel_UpperSide.png</image>
+      <image>Panel_LowerLeft.png</image>
+      <image>Panel_LowerSide.png</image>
+      <image>Panel_LowerRight.png</image>
+      <image>Panel_LeftSide.png</image>
+      <image>Panel_Center.png</image>
+      <image>Panel_RightSide.png</image>
+      <resize>Resize_Thumb.png</resize>
+    </background>
+  </window>
+</hhkskin>
+
+
+
+
+
+

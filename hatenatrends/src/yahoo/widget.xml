@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+  <name>Hatena Trends</name>
+  <version>1.5.0</version>
+  <identifier>{BD640820-66AB-40a8-9A42-18E80383B1B7}</identifier>
+  <image usage="dock" src="Resources/DocInactive.png"/>
+  <image usage="security" src="Resources/DocInactive.png"/>
+  <author name="makoto_kw" href="http://trac.makotokw.com"/>
+  <copyright>(c) 2006-2009 makoto_kw. (makoto.kw@gmail.com) </copyright>
+  <description></description>
+</metadata>

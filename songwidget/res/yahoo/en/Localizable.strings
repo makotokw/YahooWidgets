@@ -1,0 +1,23 @@
+
+"VERSIONCHECK_MENU" = "Check for Updates of the Widget";
+"CHECKUPDATEDLG_TITLE1" = "Version %1 of %2 has been released. (This version is %3) \nWould you like to close this widget and go see the webpage?";
+"CHECKUPDATEDLG_TITLE2" = "%2: This vesion is current version";
+"CHECKUPDATEDLG_BTN1"  = "YES";
+"CHECKUPDATEDLG_BTN2"  = "NO";
+"PREF_VERSIONCHECK_TITLE" = "Check for updates of the widget when staring up";
+
+"PREF_PLAYER_TITLE" = "Player/Source:";
+"PREF_AUTOPLAY_TITLE" = "Play automatically when staring up";
+"PREF_SCROLLTITLE_TITLE" = "Scroll Lengthy Titles";
+"PREF_SCROLLTITLE_DESC" = "Scrolling long track information may slow down your computer. Turn this off if you think it might help your computer's performance.";
+"PREF_INFOPANEL_TITLE" = "Information Panel:";
+"PREF_AMAZON_TITLE" = "Choose your Amazon:";
+"PREF_SENDPLAYLOG_TITLE" = "Upload Playlog(beta)";
+
+"SETUPWZ_SELJUKEBOX_TITLE" = "Please Select Jukebox to use with SongWidget.";
+"SETUPWZ_SELJUKEBOX_DESC" = "SongWidget is remote player and need real jukebox.";
+
+"CONINFO_AMAZON_RESULT" = "Amazon returned no results for %1 in %2.";
+"CONINFO_AMAZONREVIEW_RESULT" ="Amazon returned no review for %1 in %2.";
+"CONINFO_AMAZONSIMILAR_RESULT" ="Amazon returned no similar Product for %1 in %2.";
+"CONINFO_YOUTUBE_RESULT" ="YouTube returned no results for %1.";

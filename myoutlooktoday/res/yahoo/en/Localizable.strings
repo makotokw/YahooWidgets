@@ -1,0 +1,78 @@
+
+"REFRESH_MENU" = "Refresh";
+
+"VERSIONCHECK_MENU" = "Check for Updates of the Widget";
+"CHECKUPDATEDLG_TITLE1" = "Version %1 of %2 has been released. (This version is %3) \nWould you like to close this widget and go see the webpage?";
+"CHECKUPDATEDLG_TITLE2" = "This vesion is current version";
+"CHECKUPDATEDLG_BTN1"  = "YES";
+"CHECKUPDATEDLG_BTN2"  = "NO";
+"PREF_VERSIONCHECK_TITLE" = "Check for updates of the widget when staring up";
+
+"CREATE_ITEM_MENU" = "Create New Item...";
+"OPEN_MENU" = "Open";
+"SEND_MAIL_MENU" = "Send Mail...";
+"COPY_MENU" = "Copy";
+"EDIT_MENU" = "Edit...";
+"DELETE_MENU" = "Delete...";
+
+"TO_TASKLIST" = "ToDo";
+"SWITCH_TO_TASKLIST" = "Switch to TaskList";
+"TO_EVENTLIST" = "Schedule";
+"SWITCH_TO_EVENTLIST" = "Switch to EventList";
+
+"NOTHING_EVENT" = "No Events";
+"NOTHING_TASK" = "Nothing To Do";
+"ALL_DAY_EVENT" = "All Day Event";
+
+"TODAY" = "Today";
+"TOMORROW" = "Tomorrow";
+"YESTERDAY" = "Yesterday";
+
+"TIME_FROM_TO" = "%1 to %2";
+"TO_GO_MENUTE" = "%1 minute to GO!";
+"TO_GO_MENUTES" = "%1 minutes to GO!";
+"TO_GO_HOUR_MENUTES" = "%1 hour %2 minutes to GO!";
+"TO_GO_HOURS_MENUTES" = "%1 hours %2 minutes to GO!";
+"TO_GO_HOUR_MENUTE" = "%1 hour %2 minute to GO!";
+"TO_GO_HOURS_MENUTE" = "%1 hours %2 minute to GO!";
+
+"JUMP_BACKWORD" = "Previous Day";
+"JUMP_TODAY" = "Return Today";
+"JUMP_FORWARD" = "Next Day";
+"JUMP_BACKWORD_TASK" = "Previous Page";
+"JUMP_FORWARD_TASK" = "Next Page";
+
+"CONFIRM_DELETEITEM_MSG" = "Really delete the item?";
+"DELETE_BUTTON" = "Delete";
+"CANCEL_BUTTON" = "Cancel";
+
+"PREF_GROUP_APPOINTMENT" = "Appointment";
+"PREF_GROUP_TASK" = "Task";
+"PREF_GROUP_FONT" = "Font";
+
+"PREF_SOURCE_TITLE" = "Source:";
+"PREF_SOURCE_DESC" = "";
+"PREF_THEME_TITLE" = "Theme:";
+"PREF_THEME_DESC" = "";
+"PREF_DAYCOUNT_TITLE" = "";
+"PREF_DAYCOUNT_DESC" = "Number of days to display the event.";
+"PREF_TASKITEMCOUNT_TITLE" = "";
+"PREF_TASKITEMCOUNT_DESC" = "Number of ToDo items to display on a page.";
+"PREF_MAILTO_TITLE" = "Mail To:";
+"PREF_MAILSUBJECT_TITLE" = "Mail Subject:";
+"PREF_24TIME_TITLE" = "Use 24-hour time format";
+"PREF_24TIME_DESC" = "Check this box to display times in 24-hour format instead of AM/PM.";
+"PREF_UKDATEFORMAT_TITLE" = "Use UK Date Format";
+"PREF_UKDATEFORMAT_DESC" = "Check this box to display date in DD/MM instead of MM/DD.";
+"PREF_SHOWPAST_TITLE" = "Show Past Event";
+"PREF_SHOWPAST_DESC" = "Past Events will show up dimmed when this is checked on Today. They will be hidden when this isn't checked.";
+"PREF_SHOWPRIVATE_TITLE" = "Show Private Event/ToDo Items";
+"PREF_SHOWPRIVATE_DESC" = "If you want to view your private event/to do items, they will be displayed when this is checked.";
+"PREF_SHOWCOMPLETE_TITLE" = "Show Completed ToDo Items";
+"PREF_SHOWCOMPLETE_DESC" = "If you want to view your completed to do items, they will show up dimmed when this is checked.";
+
+"PREF_DEFAULTFONT_TITLE" = "Font:";
+"PREF_USETHEMETFONT_TITLE" = "Use a font via theme";
+"PREF_APPTFONTSIZE_TITLE" = "Event Title Font Size:";
+"PREF_APPTTIMEFONTSIZE_TITLE" = "Event Time/Location Font Size:";
+"PREF_TASKFONTSIZE_TITLE" = "Task Item Font Size:";

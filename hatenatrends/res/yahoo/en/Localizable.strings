@@ -1,0 +1,14 @@
+
+"HOT_KEYWORD" = "Hot Keyword";
+"CANNOT_ACCESS" = "Cannot Access";
+"REFRESH" = "Refresh";
+"PROJECT_URL" = "Project Site";
+
+"DATA_LOADING" = "Loading...";
+
+"VERSIONCHECK_MENU" = "Check for Updates of the Widget";
+"CHECKUPDATEDLG_TITLE1" = "Version %1 of %2 has been released. (This version is %3) \nWould you like to close this widget and go see the webpage?";
+"CHECKUPDATEDLG_TITLE2" = "This vesion is current version";
+"CHECKUPDATEDLG_BTN1"  = "YES";
+"CHECKUPDATEDLG_BTN2"  = "NO";
+"PREF_VERSIONCHECK_TITLE" = "Check for updates of the widget when staring up";

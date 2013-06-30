@@ -1,0 +1,24 @@
+
+"VERSIONCHECK_MENU" = "ウィジェットの更新をチェック";
+"CHECKUPDATEDLG_TITLE1" = "%2 のバージョン %1 が公開されています。(現在のバージョンは %3 です) \nウィジェットを終了しリリースページを表示しますか?";
+"CHECKUPDATEDLG_TITLE2" = "%2: このバージョンは最新バージョンです";
+"CHECKUPDATEDLG_BTN1"  = "はい";
+"CHECKUPDATEDLG_BTN2"  = "いいえ";
+"PREF_VERSIONCHECK_TITLE" = "起動時にウィジェットの更新をチェックする";
+
+"PREF_PLAYER_TITLE" = "プレーヤ/ソース:";
+"PREF_AUTOPLAY_TITLE" = "起動時に再生を開始する";
+"PREF_SCROLLTITLE_TITLE" = "長いタイトルをスクロールする";
+"PREF_SCROLLTITLE_DESC" = "タイトルのスクロールはコンピュータに負荷をかけます。再生が途切れるようでしたらチェックを外してください。";
+"PREF_INFOPANEL_TITLE" = "情報パネル:";
+"PREF_AMAZON_TITLE" = "Amazonの選択:";
+"PREF_SKIN_TITLE" = "スキン:";
+"PREF_SENDPLAYLOG_TITLE" = "再生履歴をアップする（テスト中）";
+
+"SETUPWZ_SELJUKEBOX_TITLE" = "SongWidgetで使うプレーヤを選択してください";
+"SETUPWZ_SELJUKEBOX_DESC" = "SongWidgetはリモートプレーヤのためプレーヤが必要です";
+
+"CONINFO_AMAZON_RESULT" = "%2 カテゴリ内を「%1」で検索した結果、商品が見つかりませんでした";
+"CONINFO_AMAZONREVIEW_RESULT" ="レビューが見つかりません「%1」";
+"CONINFO_AMAZONSIMILAR_RESULT" ="似た作品が見つかりません「%1」";
+"CONINFO_YOUTUBE_RESULT" = "タグ「%1」で検索した結果、動画が見つかりませんでした";

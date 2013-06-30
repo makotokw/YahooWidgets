@@ -1,0 +1,153 @@
+<?xml version="1.0" ?>
+<project default="deploy_yahoo">
+	<property name="projectname" value="HatenaTrends"/>
+	<property name="version" value="1.5.0"/>
+	<tstamp>
+		<format property="today" pattern="yyyyMMdd"/>
+	</tstamp>
+	
+	<property name="build.username" value="user"/>
+	<property name="bin" value="bin"/>
+	<property name="build" value="build"/>
+	<property name="src" value="src"/>
+	<property name="tmp" value="tmp"/>
+	<property name="res" value="res"/>
+	<property name="sidbar_my_widgets" value="C:\Users\${build.username}\AppData\Local\Microsoft\Windows Sidebar\Gadgets"/>
+	<property name="applicast_my_widgets" value="C:\Users\${build.username}\Documents\My AppliCast"/>
+	
+	<target name="test_package_yahoo" description="make package for yahoo! widget">
+		<property name="long" value="yahoo"/>
+		<property name="short" value="yw"/>
+		<zip destfile="${bin}/${projectname}_${short}_${version}.widget">
+			<fileset dir="${tmp}/${long}/" includes="Contents.widget/**"/>
+		</zip>
+	</target>
+
+	<target name="package_yahoo" description="make package for yahoo! widget">
+		<property name="long" value="yahoo"/>
+		<property name="short" value="yw"/>
+		<property name="contents" value="${tmp}/${long}/${projectname}.widget/Contents"/>
+		<property name="target_lib" value="${contents}/lib"/>
+		<property name="target_res" value="${contents}/Resources"/>
+		
+		<delete dir="${tmp}/${long}"/>
+		<mkdir dir="${tmp}"/>
+		<mkdir dir="${tmp}/${long}"/>
+		<mkdir dir="${tmp}/${long}/Contents.widget"/>
+		<mkdir dir="${tmp}/${long}/Contents.widget/Contents"/>
+		
+		<copy todir="${contents}">
+			<fileset dir="${src}/${long}" includes="*.kon,*.xml"/>
+		</copy>
+		
+		<delete dir="${target_lib}"/>
+		<mkdir dir="${target_lib}"/>
+		<copy todir="${target_lib}">
+		 	<fileset dir="${src}/wal" includes="*.js"/>
+			<fileset dir="${src}/wal/${long}" includes="*.js"/>
+		 	<fileset dir="${src}/bullseye"/>
+			<fileset dir="${src}/common" includes="*.js"/>
+			<fileset dir="${src}/${long}" includes="*.js"/>
+		</copy>
+		
+		<mkdir dir="${target_res}"/>
+		<copy todir="${target_res}">
+		 	<fileset dir="${res}/common"/>
+		 	<fileset dir="${res}/${long}"/>
+		</copy>
+		
+		<mkdir dir="${bin}"/>
+		<delete>
+			<fileset dir="${bin}">
+				<include name="${projectname}_${short}_${version}.widget"/>
+				<include name="${projectname}_${short}_${version}_${today}.zip"/>
+			</fileset>
+		</delete>
+		<exec os="Windows XP,Windows Vista" dir="." executable="${build}/ywe/Win_Converter.exe">
+		  <arg line="-flat '${tmp}/${long}/${projectname}.widget' -o '${bin}/${projectname}_${short}_${version}.widget'"/>
+		</exec>
+		<exec os="Mac OS X" dir="." executable="${build}/ywe/Mac_Converter">
+		  <arg line="-flat '${tmp}/${long}/${projectname}.widget' -o '${bin}/${projectname}_${short}_${version}.widget'"/>
+		</exec>
+		<zip destfile="${bin}/${projectname}_${short}_${version}_${today}.zip">
+			<fileset dir="${bin}" includes="${projectname}_${short}_${version}.widget"/>
+		</zip>
+	</target>
+	
+	<target name="deploy_yahoo" description="deploy for yahoo! widget" depends="package_yahoo">
+		<copy todir="${etch.yahoo_my_widgets}">
+			<fileset dir="${bin}" includes="*.widget"/>
+		</copy>
+	</target>
+	
+	<target name="package_applicast" description="make package for applicast">
+		<property name="long" value="applicast"/>
+		<property name="short" value="ac"/>
+		<property name="contents" value="${tmp}/${long}/${projectname}"/>
+		
+		<delete dir="${tmp}/${long}/${projectname}"/>
+		<mkdir dir="${tmp}"/>
+		<mkdir dir="${tmp}/${long}"/>
+		<mkdir dir="${tmp}/${long}/${projectname}"/>
+		
+		<copy todir="${contents}">
+			<fileset dir="${src}/${long}"/>
+		</copy>
+		
+		<copy todir="${etch.applicast_my_widgets}/${projectname}">
+			<fileset dir="${tmp}/${long}/${projectname}"/>
+		</copy>
+		
+		<mkdir dir="${bin}"/>
+		<zip destfile="${bin}/${projectname}_${short}_${version}.zip">
+			<fileset dir="${tmp}/${long}/" includes="${projectname}/**"/>
+		</zip>
+	</target>
+	
+	<target name="package_sidebar" description="make package for vista sidebar">
+		<property name="long" value="sidebar"/>
+		<property name="short" value="sg"/>
+		<property name="contents" value="${tmp}/${long}/${projectname}"/>
+		<property name="target_lib" value="${contents}/js"/>
+		<property name="target_res" value="${contents}/images"/>
+		
+		<delete dir="${tmp}/${long}/${projectname}"/>
+		<mkdir dir="${tmp}"/>
+		<mkdir dir="${tmp}/${long}"/>
+		<mkdir dir="${tmp}/${long}/${projectname}"/>
+		
+		<copy todir="${contents}">
+			<fileset dir="${src}/${long}"/>
+		</copy>
+		
+		<mkdir dir="${target_lib}"/>
+		<copy todir="${target_lib}">
+		 	<fileset dir="${src}/wal" includes="*.js"/>
+			<fileset dir="${src}/wal/${long}" includes="*.js"/>
+		 	<fileset dir="${src}/bullseye"/>
+			<fileset dir="${src}/common" includes="*.js"/>
+		</copy>
+		
+		<mkdir dir="${target_res}"/>
+		<copy todir="${target_res}">
+		 	<fileset dir="${res}/common"/>
+		 	<fileset dir="${res}/${long}"/>
+		</copy>
+		
+		<copy todir="${etch.sidebar_my_widgets}/${projectname}.gadget">
+			<fileset dir="${tmp}/${long}/${projectname}"/>
+		</copy>
+
+		<mkdir dir="${bin}"/>
+		<zip destfile="${bin}/${projectname}_${short}_${version}.gadget">
+			<fileset dir="${tmp}/${long}/${projectname}" includes="**"/>
+		</zip>
+	</target>
+	
+	<target name="deploy_sidebar" description="deploy for Vista Sidebar Gadget" depends="package_sidebar">
+		<copy todir="${etch.sidbar_my_widgets}">
+			<fileset dir="${bin}" includes="*.gadget"/>
+		</copy>
+	</target>
+	
+</project>

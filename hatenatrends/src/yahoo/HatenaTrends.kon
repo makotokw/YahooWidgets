@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget version="1.5.0" minimumVersion="4.5">
+	<settings>
+		<setting name="allowCustomObjectAttributes" value="true"/>
+		<setting name="defaultTracking" value="rectangle"/>
+		<setting name="debug" value="off"/>
+	</settings>
+	<window>
+		<name>theWindow</name>
+		<title>Hatena Trends</title>
+		<width>300</width>
+		<height>300</height>
+		<shadow>1</shadow>
+		<visible>0</visible>
+		<onFirstDisplay>
+			theWindow.hOffset = 10 + screen.availLeft;
+			theWindow.vOffset = (screen.availHeight + screen.availTop) - 238;
+		</onFirstDisplay>
+        
+		<contextMenuItems>
+			<menuItem title="Refresh">
+				<onSelect>ui.refresh();</onSelect>
+			</menuItem>
+			<menuItem title="CheckLatestVersion">
+				<onSelect>app.checkLatestVersion();</onSelect>
+			</menuItem>
+			<menuItem title="Project Site">
+				<onSelect>openURL("http://projects.makotokw.com/");</onSelect>
+			</menuItem>
+		</contextMenuItems>
+    
+		<scrollbar>
+			<name>theScrollbar</name>
+			<autoHide>true</autoHide>
+			<visible>0</visible>
+		</scrollbar>
+	</window>
+  
+	<action trigger="onLoad">
+	<![CDATA[
+		try {
+			include("lib/ywe_browser.js");
+			include("lib/ext-core.js");
+			include("lib/Blz.js");
+			include("lib/BlzAjax.js");
+			include("lib/BlzXml.js");
+			include("lib/BlzEvent.js");
+			include("lib/BlzWidget.js");
+			include("lib/BlzWidgetUpdate.js");
+			include("lib/BlzWidgetYahoo.js");
+			include("lib/BlzVersion.js");
+			include("lib/BlzFeed.js");
+			include("lib/BlzHatenaHotKeyword.js");
+			include("lib/HatenaTrends.js");
+			include("lib/HatenaTrendsUI.js");
+
+			Blz.Widget.widgetid = "hatenatrends";
+			Blz.Widget.widgetname = theWindow.title;
+			Blz.Widget.widgetversion = (widget.version) ? widget.version : "";
+
+			app = HatenaTrends.Application;
+			app.initialize();
+			app.widgetVersion = widget.version;
+
+			var width = 
+			ui = new HatenaTrends.UI.Window(app, preferences.skin.value, 0, 0,
+					Math.max(100,preferences.windowWidth.value),
+					Math.max(300,preferences.windowHeight.value));
+			ui.refresh();
+
+			// Localize
+			theWindow.contextMenuItems[0].title = widget
+					.getLocalizedString("REFRESH");
+			theWindow.contextMenuItems[1].title = widget
+					.getLocalizedString("VERSIONCHECK_MENU");
+			theWindow.contextMenuItems[2].title = widget
+					.getLocalizedString("PROJECT_URL");
+			preferences.versionCheck.title = widget
+					.getLocalizedString("PREF_VERSIONCHECK_TITLE");
+
+		} catch (e) {
+			Blz.Widget.alert(e);
+		}
+	]]>
+	</action>
+
+	<action trigger="onUnload">
+		preferences.windowWidth.value = theWindow.width;
+		preferences.windowHeight.value = theWindow.height;
+	</action>
+
+	<action trigger="onTimer" interval="600">
+		ui.refresh();
+	</action>
+    
+	<action trigger="onPreferencesChanged">
+		ui.loadSkin(preferences.skin.value);
+	</action>
+    
+	<action trigger="onWillChangePreferences">
+
+	</action>
+
+	<preference>
+		<name>windowWidth</name>
+		<hidden>true</hidden>
+		<type>text</type>
+		<defaultValue>200</defaultValue>
+	</preference>
+  
+	<preference>
+		<name>windowHeight</name>
+		<hidden>true</hidden>
+		<type>text</type>
+		<defaultValue>200</defaultValue>
+	</preference>
+
+	<preference name="skin">
+		<type>popup</type>
+		<title>Skin:</title>
+		<type>popup</type>
+		<defaultValue>default</defaultValue>
+		<option>default</option>
+		<option>black</option>
+		<option>blue</option>
+		<option>pink</option>
+		<option>red</option>
+		<option>sky</option>
+	</preference>
+  
+	<preference name="versionCheck">
+		<type>checkbox</type>
+		<title>Check for update when staring up</title>
+		<defaultValue>1</defaultValue>
+	</preference>
+  
+	<preference name="versionCheckDate">
+		<hidden>true</hidden>
+		<type>text</type>
+		<defaultValue></defaultValue>
+	</preference>
+
+	<about-box>
+		<image>Resources/about.png</image>
+		<about-version>
+			<font>Arial</font>
+			<size>20</size>
+			<hOffset>250</hOffset>
+			<vOffset>53</vOffset>
+			<color>#333333</color>
+			<shadow>
+				<color>#ffffff</color>
+				<hOffset>1</hOffset>
+				<vOffset>1</vOffset>
+			</shadow>
+		</about-version>
+	</about-box>
+</widget>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<gadget>
+<name>Hatena Trends</name>
+<namespace>widget.makotokw.com</namespace>
+<version>1.4.2.0</version>
+<author name="makoto_kw">
+<info url="projects.makotokw.com" />
+<logo src="images/logo.png" />
+</author>
+<copyright>&#169; 2006-2009 makoto_kw(makoto.kw@gmail.com)</copyright>
+<description>はてなの注目キーワード100を表示します。</description>
+<icons>
+<icon height="48" width="48" src="images/icon.png" />
+</icons>
+<hosts>
+<host name="sidebar">
+<base type="HTML" apiVersion="1.0.0" src="gadget.html" />
+<permissions>Full</permissions>
+<platform minPlatformVersion="1.0" />
+<defaultImage src="icon.png" />
+</host>
+</hosts>
+</gadget>

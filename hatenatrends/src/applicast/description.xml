@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Information>
+    <name>Hatena Trends</name>
+    <provider>makoto_kw</provider> 
+    <detail>はてなで最新の注目されているキーワードを表示します</detail>
+    <contact>makoto.kw@gmail.com</contact>
+    <url>http://projects.makotokw.com/</url>
+</Information>

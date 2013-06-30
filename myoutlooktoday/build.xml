@@ -1,0 +1,119 @@
+<?xml version="1.0" ?>
+<project default="deploy_yahoo">
+	<property name="projectname" value="MyOutlookToday"/>
+	<property name="version" value="1.2.1"/>
+	<tstamp>
+		<format property="today" pattern="yyyyMMdd"/>
+	</tstamp>
+	
+	<property name="bin" value="bin"/>
+	<property name="build" value="build"/>
+	<property name="src" value="src"/>
+	<property name="tmp" value="tmp"/>
+	<property name="res" value="res"/>
+	
+	<target name="package_yahoo" description="make package for yahoo! widget">
+		<property name="long" value="yahoo"/>
+		<property name="short" value="yw"/>
+		<property name="contents" value="${tmp}/${long}/${projectname}.widget/Contents"/>
+		<property name="target_lib" value="${contents}/lib"/>
+		<property name="target_res" value="${contents}/Resources"/>
+		
+		<delete dir="${tmp}/${long}"/>
+		<mkdir dir="${contents}"/>
+		
+		<copy todir="${contents}">
+		 	<fileset dir="${src}/${long}" includes="*.kon,*.xml"/>
+		</copy>
+		
+		<delete dir="${target_lib}"/>
+		<mkdir dir="${target_lib}"/>
+		<copy todir="${target_lib}">
+		 	<fileset dir="${src}/wal" includes="*.js"/>
+			<fileset dir="${src}/wal/${long}" includes="*.js"/>
+		 	<fileset dir="${src}/bullseye"/>
+			<fileset dir="${src}/common" includes="*.js"/>
+			<fileset dir="${src}/${long}" includes="*.js"/>
+		</copy>
+		
+		<mkdir dir="${target_res}"/>
+		<copy todir="${target_res}">
+		 	<fileset dir="${res}/common"/>
+		 	<fileset dir="${res}/${long}"/>
+		</copy>
+		
+		<mkdir dir="${bin}"/>
+		<delete>
+			<fileset dir="${bin}">
+				<include name="${projectname}_${short}_${version}.widget"/>
+				<include name="${projectname}_${short}_${version}_${today}.zip"/>
+			</fileset>
+		</delete>
+		<!--
+		<zip destfile="${bin}/${projectname}_${short}_${version}.widget">
+			<fileset dir="${tmp}/${long}/" includes="${projectname}.widget/**"/>
+		</zip>
+		-->
+		<exec dir="." executable="${build}/ywe/Win_Converter.exe">
+		  <arg line="-flat '${tmp}/${long}/${projectname}.widget' -o '${bin}/${projectname}_${short}_${version}.widget'"/>
+		</exec>
+		<zip destfile="${bin}/${projectname}_${short}_${version}_${today}.zip">
+			<fileset dir="${bin}" includes="${projectname}_${short}_${version}.widget"/>
+		</zip>
+	</target>
+	
+	<target name="test_package_yahoo" description="make package for yahoo! widget">
+		<property name="long" value="yahoo"/>
+		<property name="short" value="yw"/>
+		<zip destfile="${bin}/${projectname}_${short}_${version}.widget">
+			<fileset dir="${tmp}/${long}/" includes="Contents.widget/**"/>
+		</zip>
+	</target>
+	
+	<target name="deploy_yahoo" description="deploy for yahoo! widget" depends="package_yahoo">
+		<copy todir="${etch.yahoo_my_widgets}">
+			<fileset dir="${bin}" includes="*.widget"/>
+		</copy>
+	</target>
+	
+	<target name="package_sidebar" description="make package for vista sidebar">
+		<property name="long" value="sidebar"/>
+		<property name="short" value="sg"/>
+		<property name="contents" value="${tmp}/${long}/${projectname}"/>
+		<property name="target_lib" value="${contents}/js"/>
+		<property name="target_res" value="${contents}/images"/>
+		
+		<delete dir="${tmp}/${long}/${projectname}"/>
+		<mkdir dir="${tmp}"/>
+		<mkdir dir="${tmp}/${long}"/>
+		<mkdir dir="${tmp}/${long}/${projectname}"/>
+		
+		<copy todir="${contents}">
+			<fileset dir="${src}/${long}"/>
+		</copy>
+		
+		<mkdir dir="${target_lib}"/>
+		<copy todir="${target_lib}">
+		 	<fileset dir="${src}/wal" includes="*.js"/>
+			<fileset dir="${src}/wal/${long}" includes="*.js"/>
+		 	<fileset dir="${src}/bullseye"/>
+			<fileset dir="${src}/common" includes="*.js"/>
+		</copy>
+		
+		<mkdir dir="${target_res}"/>
+		<copy todir="${target_res}">
+		 	<fileset dir="${res}/common"/>
+		 	<fileset dir="${res}/${long}"/>
+		</copy>
+		
+		<copy todir="${etch.sidebar_my_widgets}/${projectname}.gadget">
+			<fileset dir="${tmp}/${long}/${projectname}"/>
+		</copy>
+		
+		<mkdir dir="${bin}"/>
+		<zip destfile="${bin}/${projectname}_${short}_${version}.gadget">
+			<fileset dir="${tmp}/${long}/${projectname}" includes="**"/>
+		</zip>
+	</target>
+	
+</project>

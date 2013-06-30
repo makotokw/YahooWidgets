@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <style>
+            body
+            {
+                width:250;
+                height:75;
+            }
+        </style>
+        <script>
+            //onSettingsClosingイベントは、設定ダイアログが閉じる前に発生
+            System.Gadget.onSettingsClosing = SettingsClosing;
+            
+            //ページのロード時に呼び出される
+            function init()
+            {
+                var currentSetting = System.Gadget.Settings.read("memoString");
+                if (currentSetting != "")
+                {
+                    memoText.value = currentSetting; 
+                }
+            }
+            
+            //設定ダイアログが閉じられるときに呼び出される
+            function SettingsClosing(event)
+            {
+                if(event.closeAction == event.Action.commit)
+                {
+                    saveSettings();
+                }
+                else
+                {
+                    event.cancel = false;
+                }
+            }
+            
+            //設定ダイアログで入力されたテキストを永続化するために保存
+            function saveSettings()
+            {
+                    var memoString = memoText.value;
+                    System.Gadget.Settings.write("memoString" , memoString);
+            }
+
+        </script>
+    </head>
+    <body onload="init()">
+        <span id="mySpan" style="font-family:ＭＳ ゴシック;font-size:10pt;">メモ</span><br />
+        <input type="text" name="memoText" length="40" value="" />
+    </body>
+</html>
+
+

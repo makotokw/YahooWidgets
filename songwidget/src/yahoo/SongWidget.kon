@@ -1,0 +1,756 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	SongWidget Copyright 2006-2008.
+	Design & Code: makoto_kw
+-->
+<widget version="0.3.1">
+  <option>allowCustomObjectAttributes</option>
+  <debug>off</debug>
+  <!----------  MAIN WINDOW  ---------->
+  <window>
+    <name>theWindow</name>
+    <title>SongWidget</title>
+    <width>260</width>
+    <height>350</height>
+    <visible>false</visible>
+    <shadow>false</shadow>
+    <opacity>255</opacity>
+    
+    <!----------  BACKGROUND  ---------->
+    <image src="Resources/white/PanelA.png">
+      <name>Background1</name>
+      <hOffset>0</hOffset>
+      <vOffset>0</vOffset>
+    </image>
+    
+    <!----------  TITLEBAR  ---------->
+    <image src="Resources/white/WidgetTitle.png">
+      <name>titleLog</name>
+      <hOffset>5</hOffset>
+      <vOffset>3</vOffset>
+    </image>
+    <text>
+      <name>versionInfo</name>
+      <font>Arial</font>
+      <style>normal</style>
+      <size>10</size>
+      <color>#FFFFFF</color>
+      <hOffset>71</hOffset>
+      <vOffset>12</vOffset>
+      <shadow hOffset="1" vOffset="1" color="#333333"/>
+    </text>
+    <image src="Resources/white/PlaylistIcon.png">
+      <name>playlistButton</name>
+      <hOffset>210</hOffset>
+      <vOffset>4</vOffset>
+      <visible>true</visible>
+      <onMouseDown>ui.uiPlayer.popupPlaylists()</onMouseDown>
+    </image>
+
+    <image src="Resources/white/SearchIcon.png">
+      <name>searchButton</name>
+      <hOffset>228</hOffset>
+      <vOffset>5</vOffset>
+      <visible>false</visible>
+    </image>
+
+    <image src="Resources/icon/iTunes.png">
+      <name>playerIcon</name>
+      <hOffset>222</hOffset>
+      <vOffset>2</vOffset>
+      <onMouseDown>ui.uiPlayer.popupPlayers();</onMouseDown>
+    </image>
+    
+    <!----------  JACKET  ---------->
+    <image src="Resources/white/Jacket.png">
+      <name>jacketImage</name>
+      <width>64</width>
+      <height>64</height>
+      <hOffset>12</hOffset>
+      <vOffset>21</vOffset>
+    </image>
+    <!----------  TRACKINFO  ---------->
+    <image src="Resources/white/ArtistIcon.png">
+      <name>artistIcon</name>
+      <hOffset>85</hOffset>
+      <vOffset>23</vOffset>
+      <onMouseDown>ui.uiPlayer.popupArtistSearch();</onMouseDown>
+    </image>
+    <text>
+      <name>uiArtist</name>
+      <font>Arial</font>
+      <size>11</size>
+      <data></data>
+      <width>140</width>
+      <color>#333333</color>
+      <alignment>left</alignment>
+      <scrolling>autoLeft</scrolling>
+      <hOffset>96</hOffset>
+      <vOffset>32</vOffset>
+      <onMouseDown>ui.uiPlayer.popupArtistSearch();</onMouseDown>
+    </text>
+    
+    <image src="Resources/white/AlbumIcon.png">
+      <name>albumIcon</name>
+      <hOffset>85</hOffset>
+      <vOffset>38</vOffset>
+      <onMouseDown>ui.uiPlayer.popupAlbumSearch();</onMouseDown>
+    </image>
+    <text>
+      <name>uiAlbum</name>
+      <font>Arial</font>
+      <size>11</size>
+      <data></data>
+      <width>140</width>
+      <color>#333333</color>
+      <alignment>left</alignment>
+      <scrolling>autoLeft</scrolling>
+      <hOffset>96</hOffset>
+      <vOffset>46</vOffset>
+      <onMouseDown>ui.uiPlayer.popupAlbumSearch();</onMouseDown>
+    </text>
+    
+    <image src="Resources/white/TrackIcon.png">
+      <name>trackIcon</name>
+      <hOffset>84</hOffset>
+      <vOffset>51</vOffset>
+      <onMouseDown>ui.uiPlayer.popupTrackSearch();</onMouseDown>
+    </image>
+    <text>
+      <name>uiTrack</name>
+      <font>Arial</font>
+      <size>11</size>
+      <data></data>
+      <width>140</width>
+      <color>#333333</color>
+      <alignment>left</alignment>
+      <scrolling>autoLeft</scrolling>
+      <hOffset>96</hOffset>
+      <vOffset>60</vOffset>
+      <onMouseDown>ui.uiPlayer.popupTrackSearch();</onMouseDown>
+    </text>
+    
+    <text>
+      <name>uiTime</name>
+      <font>Arial</font>
+      <size>11</size>
+      <data></data>
+      <width>50</width>
+      <color>#333333</color>
+      <alignment>right</alignment>
+      <hOffset>238</hOffset>
+      <vOffset>75</vOffset>
+      <onMouseUp>ui.uiPlayer.toggleTimeDisplay();</onMouseUp>
+    </text>
+    
+    <!----------  Repeat(PLAY CONTROL)  ---------->
+    <image src="Resources/white/RepeatShuffle.png">
+      <name>playMode</name>
+      <hOffset>205</hOffset>
+      <vOffset>81</vOffset>
+    </image>
+    
+    <!----------  Reverse(PLAY CONTROL)  ---------->
+    <image src="Resources/white/PrevNormal.png">
+      <name>reverseButton</name>
+      <hOffset>86</hOffset>
+      <vOffset>68</vOffset>
+      <onMouseDown>ui.uiPlayer.downReverse();</onMouseDown>
+      <onMouseEnter>ui.uiPlayer.enterReverse()</onMouseEnter>
+      <onMouseExit>ui.uiPlayer.exitReverse()</onMouseExit>
+      <onMouseUp>ui.uiPlayer.upReverse()</onMouseUp>
+    </image>
+    
+    <!----------  Stop(PLAY CONTROL)  ---------->
+    <image src="Resources/white/PlayStopNormal.png">
+      <name>playButton</name>
+      <hOffset>109</hOffset>
+      <vOffset>66</vOffset>
+      <onMouseDown>ui.uiPlayer.downPlayStop();</onMouseDown>
+      <onMouseEnter>ui.uiPlayer.enterPlayStop()</onMouseEnter>
+      <onMouseExit>ui.uiPlayer.exitPlayStop()</onMouseExit>
+      <onMouseUp>ui.uiPlayer.upPlayStop()</onMouseUp>
+    </image>
+    
+    <!----------  Forward(PLAY CONTROL)  ---------->
+    <image src="Resources/white/NextNormal.png">
+      <name>forwardButton</name>
+      <hOffset>136</hOffset>
+      <vOffset>68</vOffset>
+      <onMouseDown>ui.uiPlayer.downForward();</onMouseDown>
+      <onMouseEnter>ui.uiPlayer.enterForward();</onMouseEnter>
+      <onMouseExit>ui.uiPlayer.exitForward();</onMouseExit>
+      <onMouseUp>ui.uiPlayer.upForward();</onMouseUp>
+    </image>
+    
+    <image src="Resources/white/RectButton13.png">
+      <name>volumeButton</name>
+      <hOffset>168</hOffset>
+      <vOffset>73</vOffset>
+      <onMouseDown>ui.uiPlayer.downVolume();</onMouseDown>
+      <onMouseUp>ui.uiPlayer.upVolume();</onMouseUp>
+    </image>
+    <image src="Resources/white/VolumeIcon.png">
+      <name>volumeIconButton</name>
+      <hOffset>168</hOffset>
+      <vOffset>73</vOffset>
+    </image>
+    <image src="Resources/white/SliderMinWindow.png">
+      <name>imgVolumeMin</name>
+      <hOffset>155</hOffset>
+      <vOffset>103</vOffset>
+      <visible>false</visible>
+    </image>
+    <image src="Resources/white/SliderFill.png">
+      <name>imgVolumeFill</name>
+      <hOffset>160</hOffset>
+      <vOffset>110</vOffset>
+      <visible>false</visible>
+    </image>
+    <image src="Resources/white/SliderThumb.png">
+      <name>imgVolumeThumb</name>
+      <hOffset>159</hOffset>
+      <vOffset>107</vOffset>
+      <visible>false</visible>
+      <onMouseDown>ui.uiPlayer.downVolumeThumb();</onMouseDown>
+      <onMouseUp>ui.uiPlayer.upVolumeThumb();</onMouseUp>
+      <onMouseMove>ui.uiPlayer.moveVolumeThumb();</onMouseMove>
+    </image>
+
+    <!----------  ContentInfoSelectPanel  ---------->
+    <image src="Resources/white/ContentInfoSelectPanel.png">
+      <name>contentInfoSelectPanel</name>
+      <hOffset>0</hOffset>
+      <vOffset>100</vOffset>
+    </image>
+    <image src="Resources/icon/amazon_review.png">
+      <name>amazonReviewIcon</name>
+      <hOffset>10</hOffset>
+      <vOffset>102</vOffset>
+      <opacity>100</opacity>
+      <onMouseDown>ui.uiContentInfo.changePanel("amazonReview");</onMouseDown>
+    </image>
+    <image src="Resources/icon/amazon_infomation.png">
+      <name>amazonInfoIcon</name>
+      <hOffset>30</hOffset>
+      <vOffset>102</vOffset>
+      <opacity>100</opacity>
+      <onMouseDown>ui.uiContentInfo.changePanel("amazonInfo");</onMouseDown>
+    </image>
+    <image src="Resources/icon/amazon_similar.png">
+      <name>amazonSimilarIcon</name>
+      <hOffset>50</hOffset>
+      <vOffset>102</vOffset>
+      <opacity>100</opacity>
+      <onMouseDown>ui.uiContentInfo.changePanel("amazonSimilar");</onMouseDown>
+    </image>
+    <image src="Resources/icon/youtube.png">
+      <name>youtubeVideoIcon</name>
+      <hOffset>70</hOffset>
+      <vOffset>102</vOffset>
+      <opacity>100</opacity>
+      <onMouseDown>ui.uiContentInfo.changePanel("youtubeVideo");</onMouseDown>
+    </image>
+
+    <!----------  PREFERENCES  ---------->
+    <contextMenuItems>
+      <menuItem title="Check Latest Version">
+        <onSelect>app.checkLatestVersion();</onSelect>
+      </menuItem>
+      <menuItem title="sperator"/>
+      <menuItem title="Disable Album Infomation">
+        <onSelect>ui.uiContentInfo.changePanel("none");</onSelect>
+      </menuItem>
+      <menuItem title="Amazon Review">
+        <onSelect>ui.uiContentInfo.changePanel("amazonReview");</onSelect>
+      </menuItem>
+      <menuItem title="Amazon Infomation">
+        <onSelect>ui.uiContentInfo.changePanel("amazonInfo");</onSelect>
+      </menuItem>
+      <menuItem title="Amazon Similar Album">
+        <onSelect>ui.uiContentInfo.changePanel("amazonSimilar");</onSelect>
+      </menuItem>
+      <menuItem title="YouTube Video">
+        <onSelect>ui.uiContentInfo.changePanel("youtubeVideo");</onSelect>
+      </menuItem>
+    </contextMenuItems>
+  </window>
+  
+  <window>
+    <name>setupWizardWindow</name>
+    <title>Setup Wizard</title>
+    <width>400</width>
+    <height>180</height>
+    <visible>false</visible>
+    <shadow>false</shadow>
+    <opacity>255</opacity>
+    
+    <image src="Resources/white/PanelA.png">
+      <name>seljbBackground1</name>
+      <hOffset>0</hOffset>
+      <vOffset>0</vOffset>
+      <width>400</width>
+      <height>180</height>
+    </image>
+  
+    <text name="back" visible="false">
+      <font>Arial</font>
+      <size>16</size>
+      <data>Back</data>
+      <color>#FFFFFF</color>
+      <hOffset>320</hOffset>
+      <vOffset>150</vOffset>
+      <shadow hOffset="1" vOffset="1" color="#333333"/>
+      <onMouseDown>setupWizard.back();</onMouseDown>
+      <onMouseEnter>back.color="#6699ff";</onMouseEnter>
+      <onMouseExit>back.color="#000000";</onMouseExit>
+    </text>
+    
+    <text name="selectJukeboxTitle" visible="false">
+      <font>Arial</font>
+      <size>16</size>
+      <data>Please Select Jukebox to use with SongWidget.</data>
+      <color>#000000</color>
+      <hOffset>12</hOffset>
+      <vOffset>20</vOffset>
+      <shadow hOffset="1" vOffset="1" color="#ffffff"/>
+    </text>
+
+    <text name="selectJukeboxDiscription" visible="false">
+      <font>Arial</font>
+      <size>14</size>
+      <data>SongWidget is remote player and need real jukebox. </data>
+      <color>#333333</color>
+      <hOffset>20</hOffset>
+      <vOffset>37</vOffset>
+      <shadow hOffset="1" vOffset="1" color="#ffffff"/>
+    </text>
+
+    <image name="seliTunesIcon" src="Resources/icon/iTunes.png" visible="false">
+      <hOffset>20</hOffset>
+      <vOffset>50</vOffset>
+    </image>
+    
+    <text name="seliTunesText" visible="false">
+      <font>Arial</font>
+      <size>14</size>
+      <data>iTunes</data>
+      <color>#000000</color>
+      <hOffset>40</hOffset>
+      <vOffset>64</vOffset>
+      <shadow hOffset="1" vOffset="1" color="#bbbbbb"/>
+      <onMouseDown>setupWizard.selectJukebox(seliTunesText.data);</onMouseDown>
+      <onMouseEnter>seliTunesText.color="#6699ff";</onMouseEnter>
+      <onMouseExit>seliTunesText.color="#000000";</onMouseExit>
+    </text>
+
+    <image name="selWmpIcon" src="Resources/icon/Windows Media Player.png" visible="false">
+      <hOffset>20</hOffset>
+      <vOffset>70</vOffset>
+    </image>
+    
+    <text name="selWmpText" visible="false">
+      <font>Arial</font>
+      <style>normal</style>
+      <size>14</size>
+      <data>Windows Media Player</data>
+      <color>#000000</color>
+      <hOffset>40</hOffset>
+      <vOffset>84</vOffset>
+      <shadow hOffset="1" vOffset="1" color="#bbbbbb"/>
+      <onMouseDown>setupWizard.selectJukebox(selWmpText.data);</onMouseDown>
+      <onMouseEnter>selWmpText.color="#6699ff";</onMouseEnter>
+      <onMouseExit>selWmpText.color="#000000";</onMouseExit>
+    </text>
+
+    <image name="selYMEIcon" src="Resources/icon/Yahoo Music Jukebox.png" visible="false">
+      <hOffset>20</hOffset>
+      <vOffset>90</vOffset>
+    </image>
+    
+    <text name="selYMEText" visible="false">
+      <font>Arial</font>
+      <size>14</size>
+      <data>Yahoo Music Jukebox</data>
+      <color>#000000</color>
+      <hOffset>40</hOffset>
+      <vOffset>104</vOffset>
+      <shadow hOffset="1" vOffset="1" color="#bbbbbb"/>
+      <onMouseDown>setupWizard.selectJukebox(selYMEText.data);</onMouseDown>
+      <onMouseEnter>selYMEText.color="#6699ff";</onMouseEnter>
+      <onMouseExit>selYMEText.color="#000000";</onMouseExit>
+    </text>
+
+    <image name="selMoraIcon" src="Resources/icon/Mora.png" visible="false">
+      <hOffset>20</hOffset>
+      <vOffset>110</vOffset>
+    </image>
+    <text name="selMoraText" visible="false">
+      <font>Arial</font>
+      <size>14</size>
+      <data>Mora</data>
+      <color>#000000</color>
+      <hOffset>40</hOffset>
+      <vOffset>125</vOffset>
+      <shadow hOffset="1" vOffset="1" color="#bbbbbb"/>
+      <onMouseDown>setupWizard.selectJukebox(selMoraText.data);</onMouseDown>
+      <onMouseEnter>selMoraText.color="#6699ff";</onMouseEnter>
+      <onMouseExit>selMoraText.color="#000000";</onMouseExit>
+    </text>
+		
+		<text name="selectAmazonLocaleTitle" visible="false">
+			<font>Arial</font>
+			<size>16</size>
+			<data>Please Select Your Amazon</data>
+			<color>#FFFFFF</color>
+			<hOffset>12</hOffset>
+			<vOffset>20</vOffset>
+			<shadow hOffset="1" vOffset="1" color="#333333"/>
+		</text>
+		
+		<text name="selAmazonLocalUS" visible="false">
+			<font>Arial</font>
+			<size>14</size>
+			<data>www.amazon.com(US)</data>
+			<color>#000000</color>
+			<hOffset>30</hOffset>
+			<vOffset>40</vOffset>
+			<shadow hOffset="1" vOffset="1" color="#bbbbbb"/>
+			<onMouseDown>setupWizard.selectAmazonLocale("US");</onMouseDown>			
+			<onMouseEnter>selAmazonLocalUS.color="#6699ff";</onMouseEnter>
+			<onMouseExit>selAmazonLocalUS.color="#000000";</onMouseExit>
+		</text>
+		
+		<text name="selAmazonLocalUK" visible="false">
+			<font>Arial</font>
+			<style>normal</style>
+			<size>14</size>
+			<data>www.amazon.co.uk</data>
+			<color>#000000</color>
+			<hOffset>30</hOffset>
+			<vOffset>58</vOffset>
+			<shadow hOffset="1" vOffset="1" color="#bbbbbb"/>
+			<onMouseDown>setupWizard.selectAmazonLocale("UK");</onMouseDown>			
+			<onMouseEnter>selAmazonLocalUK.color="#6699ff";</onMouseEnter>
+			<onMouseExit>selAmazonLocalUK.color="#000000";</onMouseExit>
+		</text>
+		
+		<text name="selAmazonLocalFR" visible="false">
+			<font>Arial</font>
+			<size>14</size>
+			<data>www.amazon.fr</data>
+			<color>#000000</color>
+			<hOffset>30</hOffset>
+			<vOffset>76</vOffset>
+			<shadow hOffset="1" vOffset="1" color="#bbbbbb"/>
+			<onMouseDown>setupWizard.selectAmazonLocale("FR");</onMouseDown>			
+			<onMouseEnter>selAmazonLocalFR.color="#6699ff";</onMouseEnter>
+			<onMouseExit>selAmazonLocalFR.color="#000000";</onMouseExit>
+		</text>
+		
+		<text name="selAmazonLocalDE" visible="false">
+			<font>Arial</font>
+			<size>14</size>
+			<data>www.amazon.de</data>
+			<color>#000000</color>
+			<hOffset>30</hOffset>
+			<vOffset>94</vOffset>
+			<shadow hOffset="1" vOffset="1" color="#bbbbbb"/>
+			<onMouseDown>setupWizard.selectAmazonLocale("DE");</onMouseDown>			
+			<onMouseEnter>selAmazonLocalDE.color="#6699ff";</onMouseEnter>
+			<onMouseExit>selAmazonLocalDE.color="#000000";</onMouseExit>
+		</text>
+		
+		<text name="selAmazonLocalCA" visible="false">
+			<font>Arial</font>
+			<size>14</size>
+			<data>www.amazon.ca</data>
+			<color>#000000</color>
+			<hOffset>30</hOffset>
+			<vOffset>112</vOffset>
+			<shadow hOffset="1" vOffset="1" color="#bbbbbb"/>
+			<onMouseDown>setupWizard.selectAmazonLocale("CA");</onMouseDown>			
+			<onMouseEnter>selAmazonLocalCA.color="#6699ff";</onMouseEnter>
+			<onMouseExit>selAmazonLocalCA.color="#000000";</onMouseExit>
+		</text>
+		
+		<text name="selAmazonLocalJP" visible="false">
+			<font>Arial</font>
+			<size>14</size>
+			<data>www.amazon.jp</data>
+			<color>#000000</color>
+			<hOffset>30</hOffset>
+			<vOffset>130</vOffset>
+			<shadow hOffset="1" vOffset="1" color="#bbbbbb"/>
+			<onMouseDown>setupWizard.selectAmazonLocale("JP");</onMouseDown>			
+			<onMouseEnter>selAmazonLocalJP.color="#6699ff";</onMouseEnter>
+			<onMouseExit>selAmazonLocalJP.color="#000000";</onMouseExit>
+		</text>
+	</window>
+
+	<!----------  ACTIONS  ---------->
+	<action trigger="onLoad">
+<![CDATA[
+	try {
+		include("lib/dummybrowser.js");
+		include("lib/prototype.js");
+		include("lib/prototype_patch.js");
+		include("lib/wsse.js");
+		include("lib/Blz.js");
+		include("lib/BlzXml.js");
+		include("lib/BlzDate.js");
+		include("lib/BlzGuid.js");
+		include("lib/BlzVersion.js");
+		include("lib/BlzWidget.js");
+		include("lib/BlzWidgetUpdate.js");
+		include("lib/BlzWidgetYahoo.js");
+		include("lib/BlzAmazon.js");
+		include("lib/BlzGoogle.js");
+		include("lib/BlzYouTube.js");
+		include("lib/BlzPlaylog.js");
+		include("lib/MiItemPanel.js");
+		include("lib/SongWidget.js");
+		include("lib/SongWidgetApplication.js");
+		include("lib/SongWidgetContentInfoAppLogic.js");
+		include("lib/SongWidgetPlayerAppLogic.js");
+		include("lib/SongWidgetPlayLogAppLogic.js");
+		include("lib/SongWidgetUIUtils.js");
+		include("lib/SongWidgetUIContentInfo.js");
+		include("lib/SongWidgetUIPlayer.js");
+		include("lib/SongWidgetUIPreference.js");
+		include("lib/SongWidgetUISetupWizard.js");
+		include("lib/SongWidgetUIManager.js");
+		
+		if (system.platform == "windows") {
+			include("lib/BlzMediaPlayer.js");
+			include("lib/BlzMediaPlayer_patch_win.js");
+			include("lib/BlzMediaPlayerWMP.js");
+			include("lib/BlzMediaPlayeriTunesWin.js");
+			include("lib/BlzMediaPlayerYME.js");
+			include("lib/BlzMediaPlayerMoraWin.js");
+		} else if (system.platform == "macintosh") {
+			include("lib/BlzMediaPlayer.js");
+			include("lib/BlzMediaPlayer_patch_mac.js");
+			include("lib/BlzMediaPlayeriTunesYahoo.js");
+		}
+		
+		Blz.Widget.widgetid = "songwidget";
+		Blz.Widget.widgetname = "SongWidget";
+		Blz.Widget.widgetversion = widget.version;
+		
+		for (var mi=0; mi<theWindow.contextMenuItems.length; mi++) {
+			if (theWindow.contextMenuItems[mi].title == "sperator") {
+				theWindow.contextMenuItems[mi].title = Blz.Widget.getMenuSeparatorTitle();
+			}
+		}
+		
+		app = new SongWidget.Application();
+		app.widgetVersion = widget.version;
+		versionInfo.data = widget.version + " Preview";
+		// makoto_kw's subscription-id for Amazon
+		var amazonid = "0F49XFHPQYWX91XK4K82";
+		// makoto_kw's associate ids
+		var amazontags = new Object();
+		amazontags["US"] = "makotokw-20";
+		amazontags["UK"] = "makotokw-21";
+		amazontags["FR"] = "makotokw09-21";
+		amazontags["DE"] = "makotokw04-21";
+		amazontags["CA"] = "makotokw0c-20";
+		amazontags["JP"] = "makotokw-22";
+		var amazonlocale = preferences.amazonLocale.value;
+		// makoto_kw's devid for YouTube
+		var youtubeid = "n80Pd_kGNQI";
+		app.contentInfoAppLogic.initServices(amazonid,amazontags,amazonlocale,youtubeid);
+		
+		ui = new SongWidget.UI.Manager(app);
+		var ret = app.start();
+		if (!ret) {
+			setupWizard = new SongWidget.UI.SetupWizard(setupWizardWindow);
+			var callback = function() {
+				app.start();
+				ui.initControls();
+				ui.update();
+				theWindow.visible = true;
+			};
+			setupWizard.start(callback);
+		} else {
+			ui.initControls();
+			ui.update();
+			theWindow.visible = true;
+		}
+	} catch (e) {
+		alert("Cannot Initialize : " + e);
+	}
+]]>
+	</action>
+	
+	<action trigger="onUnload">
+		if (app) { app.dispose(); app = null; }
+		if (ui) { ui.dispose(); ui = null; }
+	</action>
+
+	<action trigger="onTimer" interval="1">
+		if (app) { app.onTimer(); }
+	</action>
+	
+	<timer name="fastRewindTimer">
+		<interval>1</interval>
+		<ticking>false</ticking>
+		<onTimerFired>
+			if (ui.uiPlayer.reverseMouseDown) {
+				app.playerAppLogic.rewind();
+			}
+			fastRewindTimer.ticking = false;
+		</onTimerFired>		
+	</timer>
+	
+	<timer name="fastForwardTimer">
+		<interval>1</interval>
+		<ticking>false</ticking>
+		<onTimerFired>
+			if (ui.uiPlayer.forwardMouseDown) {
+				app.playerAppLogic.fastForward();
+			}
+			fastForwardTimer.ticking = false;
+		</onTimerFired>		
+	</timer>
+
+	<action trigger="onPreferencesChanged">
+		app.onPreferencesChanged();
+		ui.onPreferencesChanged();
+	</action>
+	
+  <!----------  PREFERENCES  ---------->
+  <preference name="lastVersion">
+    <hidden>true</hidden>
+    <type>text</type>
+  </preference>
+  
+  <preference name="player">
+    <title>Player/Source:</title>
+    <defaultValue></defaultValue>
+    <type>popup</type>
+  </preference>
+	
+	<preference name="lastPlaylist">
+		<defaultValue></defaultValue>
+		<hidden>true</hidden>
+		<type>text</type>
+	</preference>
+	
+	<preference name="displayControl">
+		<defaultValue>0</defaultValue>
+		<hidden>true</hidden>
+		<type>text</type>
+	</preference>
+
+	<preference name="lastVolume">
+		<defaultValue>50</defaultValue>
+		<hidden>true</hidden>
+	</preference>
+	
+	<preference name="automaticallyPlay">
+		<type>checkbox</type>
+		<title>Play automatically when staring up</title>
+		<defaultValue>1</defaultValue>
+	</preference>
+		
+	<preference name="displayState">
+		<hidden>true</hidden>
+		<type>text</type>
+		<defaultValue>1</defaultValue>
+	</preference>
+
+	<preference name="timeDisplay">
+		<hidden>true</hidden>
+		<type>text</type>
+		<defaultValue>0</defaultValue>
+	</preference>
+	
+	<preference name="scrollText">
+		<type>checkbox</type>
+		<title>Scroll Lengthy Titles</title>
+		<description>Scrolling long track information may slow down your computer.
+
+Turn this off if you think it might help your computer's performance.</description>
+		<defaultValue>1</defaultValue>
+	</preference>
+	
+	 <preference name="sendPlayLog">
+    <type>checkbox</type>
+    <title>Upload Playlog</title>
+    <defaultValue>1</defaultValue>
+  </preference>
+	
+	<preference name="contentInfoPanel">
+		<title>Information Panel:</title>
+		<defaultValue>amazonReview</defaultValue>
+		<hidden>false</hidden>
+		<type>popup</type>
+		<option>None</option><optionValue>none</optionValue>
+		<option>Amazon Review</option><optionValue>amazonReview</optionValue>
+		<option>Amazon Information</option><optionValue>amazonInfo</optionValue>
+		<option>Amazon Similar Album</option><optionValue>amazonSimilar</optionValue>
+		<option>YouTube Video</option><optionValue>youtubeVideo</optionValue>
+	</preference>
+	
+	<preference name="skin">
+		<title>Skin:</title>
+		<defaultValue>white</defaultValue>
+		<hidden>false</hidden>
+		<type>popup</type>
+		<option>default</option><optionValue>white</optionValue>
+	</preference>
+	
+	<!--
+	<preference name="versionCheck">
+		<type>checkbox</type>
+		<title>check latest version automatically when staring up</title>
+		<defaultValue>1</defaultValue>
+	</preference>
+	-->
+	
+	<preference name="versionCheckDate">
+		<hidden>true</hidden>
+		<type>text</type>
+		<defaultValue></defaultValue>
+	</preference>
+	
+	<preference name="userid">
+		<hidden>true</hidden>
+		<type>text</type>
+		<defaultValue></defaultValue>
+	</preference>
+	
+	<!-- PREF GROUP LOCALE -->
+	<preferenceGroup>
+		<name>pgLocales</name>
+		<title>Locael</title>
+	</preferenceGroup>
+	
+	<preference name="amazonLocale">
+		<title>Choose your Amazon:</title>
+		<group>pgLocales</group>
+		<defaultValue>US</defaultValue>
+		<hidden>false</hidden>
+		<type>popup</type>
+		<option>www.amazon.com(US)</option><optionValue>US</optionValue>
+		<option>www.amazon.co.uk</option><optionValue>UK</optionValue>
+		<option>www.amazon.fr</option><optionValue>FR</optionValue>
+		<option>www.amazon.de</option><optionValue>DE</optionValue>
+		<option>www.amazon.ca</option><optionValue>CA</optionValue>
+		<option>www.amazon.jp</option><optionValue>JP</optionValue>
+	</preference>
+	
+  <about-box>
+    <image>Resources/about.png</image>
+    <about-version>
+      <font>Arial</font>
+      <size>30</size>
+      <hOffset>260</hOffset>
+      <vOffset>70</vOffset>
+      <color>#ffffff</color>
+      <shadow color="#444444" hOffset="1" vOffset="1"/>
+    </about-version>
+  </about-box>
+</widget>

@@ -1,0 +1,115 @@
+<?xml version="1.0" ?>
+<project default="deploy_yahoo_win">
+	<property name="projectname" value="SongWidget"/>
+	<property name="version" value="0.3.1"/>
+	
+	<property name="bin" value="bin"/>
+	<property name="src" value="src"/>
+	<property name="tmp" value="tmp"/>
+	<property name="res" value="res"/>
+	
+	<target name="test_package_yahoo_win" description="make package for yahoo! widget">
+		<property name="long" value="yahoo"/>
+		<property name="short" value="yw"/>
+		<property name="platform" value="win"/>
+		<zip destfile="${bin}/${projectname}_${short}_${platform}_${version}.widget">
+			<fileset dir="${tmp}/${long}_${platform}/" includes="Contents.widget/**"/>
+		</zip>
+	</target>
+	
+	<target name="package_yahoo_win" description="make package for yahoo! widget on Windows">
+		<property name="long" value="yahoo"/>
+		<property name="short" value="yw"/>
+		<property name="platform" value="win"/>
+		<property name="contents" value="${tmp}/${long}_${platform}/Contents.widget/Contents"/>
+		<property name="target_lib" value="${contents}/lib"/>
+		<property name="target_res" value="${contents}/Resources"/>
+		
+		<mkdir dir="${tmp}"/>
+		<mkdir dir="${tmp}/${long}_${platform}"/>
+		<mkdir dir="${tmp}/${long}_${platform}/Contents.widget"/>
+		<mkdir dir="${tmp}/${long}_${platform}/Contents.widget/Contents"/>
+		
+		<copy todir="${contents}">
+		 	<fileset dir="${src}/${long}" includes="*.kon"/>
+			<fileset dir="${src}/${long}" includes="*.xml"/>
+		</copy>
+		
+		<delete dir="${target_lib}"/>
+		<mkdir dir="${target_lib}"/>
+		<copy todir="${target_lib}">
+			<fileset dir="${src}/sdk" includes="*.js"/>
+			<fileset dir="${src}/wal" includes="*.js"/>
+			<fileset dir="${src}/wal/${long}" includes="*.js"/>
+		 	<fileset dir="${src}/bullseye" includes="*.js"/>
+			<fileset dir="${src}/common/" includes="*.js"/>
+			<fileset dir="${src}/${platform}/"  includes="*.js"/>
+			<fileset dir="${src}" includes="*.js"/>
+		</copy>
+		
+		<mkdir dir="${target_res}"/>
+		<copy todir="${target_res}">
+		 	<fileset dir="${res}/common"/>
+		 	<fileset dir="${res}/${long}"/>
+		</copy>
+		
+		<mkdir dir="${bin}"/>
+		<zip destfile="${bin}/${projectname}_${short}_${platform}_${version}.widget">
+			<fileset dir="${tmp}/${long}_${platform}/" includes="Contents.widget/**"/>
+		</zip>
+	</target>
+	
+	<target name="package_yahoo_mac" description="make package for yahoo! widget on MacOSX">
+			<property name="long" value="yahoo"/>
+			<property name="short" value="yw"/>
+			<property name="platform" value="mac"/>
+			<property name="contents" value="${tmp}/${long}_${platform}/Contents.widget/Contents"/>
+			<property name="target_lib" value="${contents}/lib"/>
+			<property name="target_res" value="${contents}/Resources"/>
+			
+			<mkdir dir="${tmp}"/>
+			<mkdir dir="${tmp}/${long}_${platform}"/>
+			<mkdir dir="${tmp}/${long}_${platform}/Contents.widget"/>
+			<mkdir dir="${tmp}/${long}_${platform}/Contents.widget/Contents"/>
+			
+			<copy todir="${contents}">
+			 	<fileset dir="${src}/${long}" includes="*.kon"/>
+				<fileset dir="${src}/${long}" includes="*.xml"/>
+				<fileset dir="${src}/${platform}"  includes="*.applescript"/>
+			</copy>
+			
+			<delete dir="${target_lib}"/>
+			<mkdir dir="${target_lib}"/>
+			<copy todir="${target_lib}">
+				<fileset dir="${src}/sdk" includes="*.js"/>
+				<fileset dir="${src}/wal" includes="*.js"/>
+				<fileset dir="${src}/wal/${long}" includes="*.js"/>
+			 	<fileset dir="${src}/bullseye" includes="*.js"/>
+				<fileset dir="${src}/common" includes="*.js"/>
+				<fileset dir="${src}/${platform}"  includes="*.js"/>
+				<fileset dir="${src}" includes="*.js"/>
+			</copy>
+			
+			<mkdir dir="${target_res}"/>
+			<copy todir="${target_res}">
+			 	<fileset dir="${res}/common"/>
+			 	<fileset dir="${res}/${long}"/>
+			</copy>
+			
+			<mkdir dir="${bin}"/>
+			<zip destfile="${bin}/${projectname}_${short}_${platform}_${version}.widget">
+				<fileset dir="${tmp}/${long}_${platform}/" includes="Contents.widget/**"/>
+			</zip>
+		</target>
+	
+	<target name="deploy_yahoo_win" description="deploy for yahoo! widget(windows)" depends="package_yahoo_win">
+		<copy todir="${win_ywidgets_target_dir}">
+			<fileset dir="${bin}" includes="*.widget"/>
+		</copy>
+	</target>
+	<target name="deploy_yahoo_mac" description="deploy for yahoo! widget(macosx)" depends="package_yahoo_mac">
+		<copy todir="${macoxs_ywidgets_target_dir}">
+			<fileset dir="${bin}" includes="*.widget"/>
+		</copy>
+	</target>
+</project>

@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	My Outlook Today (formerly PIM Overview)
+	MyOutlookToday is freely distributable under the terms of an BSD license.
+	Copyright (c) 2006-2009, makoto_kw (makoto.kw@gmail.com) All rights reserved.
+-->
+<widget version="1.2.1" minimumVersion="4.0">
+	<settings>
+		<setting name="allowCustomObjectAttributes" value="true"/>
+		<setting name="defaultTracking" value="rectangle"/>
+		<setting name="debug" value="off"/>
+	</settings>
+	<window name="theWindow" width="159" height="171" visible="0" shadow="0" title="My Outlook Today">
+		<onFirstDisplay>
+			<![CDATA[
+				theWindow.hOffset = 10 + screen.availLeft;
+				theWindow.vOffset = (screen.availHeight + screen.availTop) - 238;
+			]]>
+		</onFirstDisplay>
+		
+		<contextMenuItems>
+			<menuItem title="Refresh">
+				<onSelect>
+				<![CDATA[
+					ui.update(true);
+				]]>
+				</onSelect>
+			</menuItem>
+			<menuItem title="CheckLatestVersion">
+				<onSelect>
+					<![CDATA[
+						var auto = false;
+						var timer = 1000 * 60 * 60 * 24 * 7; // 1 weeks
+						new WidgetUpdateAppLogic(Blz.Widget.widgetid, Blz.Widget.widgetname, Blz.Widget.widgetversion, auto, timer);
+					]]>
+				</onSelect>
+			</menuItem>
+		</contextMenuItems>
+	
+		<image name="topLeft" hOffset="0" vOffset="0" src="Resources/images/theme/dark/top_left.png"/>
+		<image name="top" hOffset="20" vOffset="0" width="99" src="Resources/images/theme/dark/top.png"/>
+		<image name="topRight" hOffset="260" vOffset="0" src="Resources/images/theme/dark/top_right.png"/>
+		<image name="left" hOffset="0" vOffset="0" fillMode="tile" src="Resources/images/theme/dark/left.png"/>
+		<image name="fill" hOffset="0" vOffset="25" fillMode="tile" src="Resources/images/theme/dark/center.png" visible="false"/>
+		<image name="right" hOffset="0" vOffset="0" fillMode="tile" src="Resources/images/theme/dark/right.png"/>
+		<image name="bottomLeft" hOffset="0" vOffset="55" src="Resources/images/theme/dark/bottom_left.png"/>
+		<image name="bottom" hOffset="30" vOffset="158" src="Resources/images/theme/dark/bottom.png"/>
+		<image name="bottomRight" hOffset="129" vOffset="158" src="Resources/images/theme/dark/bottom_right.png"/>
+
+		<image name="backwardCap" src="Resources/images/theme/dark/icon_prev.png" onMouseDown="ui.showDay(ui.currDayOffset-1);"/>
+		<image name="todayCap" src="Resources/images/theme/dark/icon_today.png" onMouseDown="ui.showDay(0);"/>
+		<image name="forwardCap" src="Resources/images/theme/dark/icon_next.png" onMouseDown="ui.showDay(ui.currDayOffset+1);"/>
+		
+		<image name="backwardTaskCap" src="Resources/images/theme/dark/icon_prev.png" onMouseDown="ui.showTaskPage(ui.taskPageIndex-1);"/>
+		<text name="taskPageText" data="" alignment="center"/>
+		<image name="forwardTaskCap" src="Resources/images/theme/dark/icon_next.png" onMouseDown="ui.showTaskPage(ui.taskPageIndex+1);"/>
+		
+		<image name="switchListIcon" src="Resources/images/theme/dark/icon_tasklist.png" onMouseDown="ui.switchView();"/>
+		<text name="switchList" alignment="right" data="Schedule" onMouseDown="ui.switchView();"/>
+		
+	</window>
+	
+	<action trigger="onLoad">
+	<![CDATA[
+		try {
+			include("lib/ywe_browser.js");
+			include("lib/ext-core.js")
+			include("lib/Blz.js");
+			include("lib/BlzAjax.js");
+			include("lib/BlzXml.js");
+			include("lib/BlzEvent.js");
+			include("lib/BlzVersion.js");
+			include("lib/BlzWidget.js");
+			include("lib/BlzWidgetYahoo.js");
+			include("lib/BlzWidgetUpdate.js");
+			include("lib/BlzOutlook.js");
+			include("lib/BlzOutlookDate.js");
+			include("lib/MyOutlookToday.js");
+			include("lib/MyOutlookTodayUI.js");
+			
+			Blz.Widget.widgetid = "myoutlooktoday";
+			Blz.Widget.widgetname = theWindow.title;
+			Blz.Widget.widgetversion = (widget.version) ? widget.version : "";
+			
+			app = MyOutlookToday.Application;
+			app.initialize();
+			
+			ui = MyOutlookToday.UI;
+			
+			// default themes
+			include("Resources/images/theme/dark/theme.js");
+			include("Resources/images/theme/outlook2007/theme.js");
+			include("Resources/images/theme/metal/theme.js");
+			for (name in ui.themes) {
+				ui.themes[name].path = 'Resources/images/theme/'+name+'/';
+			}
+			
+			ui.initialize(app);
+
+			var auto = true;
+			var timer = 1000 * 60 * 60 * 24 * 7; // 1 weeks
+			new WidgetUpdateAppLogic(Blz.Widget.widgetid, Blz.Widget.widgetname, Blz.Widget.widgetversion, auto, timer);
+		} catch (e) {
+			Blz.Widget.alert(e);
+		}
+	]]>
+	</action>
+
+	<action trigger="onUnload">
+		ui.close();
+	</action>
+	
+	<action trigger="onWakeFromSleep">
+		ui.update(true);
+	</action>
+
+	<action trigger="onPreferencesChanged">
+		ui.onPreferenceChanged();
+		reconnectOutlookTimer.ticking = true;
+	</action>
+
+	<timer name="updateBoardTimer" interval="45" ticking="false">
+		<onTimerFired>
+			ui.update();
+		</onTimerFired>
+	</timer>
+	
+	<timer name="forceUpdateBoardTimer" interval="3600" ticking="false">
+		<onTimerFired>
+			ui.update(true);
+		</onTimerFired>
+	</timer>
+	
+	<timer name="reconnectOutlookTimer" interval="60" ticking="false">
+		<onTimerFired>
+			ui.update(true);
+			reconnectOutlookTimer.ticking = false;
+		</onTimerFired>
+	</timer>
+
+	<!-- *********************************** -->
+	<!-- Preferences -->
+	<!-- *********************************** -->
+
+	<!-- PREF GROUP General -->
+	<preference name="lastList" type="text" hidden="true" defaultValue="EventList"/>
+	<preference name="lastWindowSize" type="text" hidden="true" defaultValue="159,171"/>
+	<preference name="outlookFolderSource" type="popup">
+		<option>default</option>
+	</preference>
+	<preference name="showPrivate" type="checkbox" defaultValue="0"/>
+	<preference name="mailTo" type="text"/>
+	<preference name="mailSubject" type="text"/>
+	<preference name="versionCheck" type="checkbox" defaultValue="1"/>
+	<preference name="versionCheckDate" type="text" hidden="true" defaultValue=""/>
+	
+	<preference name="theme" type="popup"/>
+
+	<!-- PREF GROUP Appointment -->
+	<preferenceGroup name="pgAppointment"/>
+	<preference name="displayDayCount" group="pgAppointment" type="text" defaultValue="2"/>
+
+	<!-- not implemented
+		  <preference name="displayMoveDayCount" group="pgAppointment" type="text" defaultValue="2">
+			<description>Number of days to move the event when next/prev button is clicked</description>
+		  </preference>
+		  -->
+
+	<!-- not implemented
+		<preference name="skipHoliday" group="pgAppointment" type="checkbox" defaultValue="0">
+			<title>Skip Weekend that has no event</title>
+			<description>Don't count to display when you have no event at Satday or Sunday.</description>
+		</preference>
+		-->
+
+	<preference name="useUkDateFormat" group="pgAppointment" type="checkbox" defaultValue="0"/>
+	<preference name="use24HourTime" group="pgAppointment" type="checkbox" defaultValue="0"/>
+	<preference name="showPast" group="pgAppointment" type="checkbox" defaultValue="1"/>
+	
+	<!-- PREF GROUP Task -->
+	<preferenceGroup name="pgTask"/>
+	<preference name="displayTaskCount" group="pgTask" type="text" defaultValue="16"/>
+	<preference name="showCompleted" group="pgTask" type="checkbox" defaultValue="0"/>
+	
+	<!-- PREF GROUP FONT -->
+	<preferenceGroup name="pgFont"/>
+	<preference name="defaultFont" group="pgFont" type="font" defaultValue="Arial"/>
+	<preference name="useThemeFont" group="pgFont" type="checkbox" defaultValue="0"/>
+	<preference name="apptItemTitleFontSize" group="pgFont" type="text" defaultValue="12"/>
+	<preference name="apptItemTimeFontSize" group="pgFont" type="text" defaultValue="12"/>
+	<preference name="taskItemFontSize" group="pgFont" type="text" defaultValue="12"/>
+
+	<about-box>
+		<image>Resources/images/about.png</image>
+		<about-version>
+			<font>Arial</font>
+			<size>20</size>
+			<hOffset>335</hOffset>
+			<vOffset>100</vOffset>
+			<color>#ffffff</color>
+			<shadow>
+				<color>#333333</color>
+				<hOffset>1</hOffset>
+				<vOffset>1</vOffset>
+			</shadow>
+		</about-version>
+		<text font="Verdana" hOffset="20" vOffset="170" size="10" color="#ffffff" data="Ext Core Library 3.0 Copyright(c) 2006-2009, Ext JS, LLC." url="http://extjs.com/">
+			<shadow>
+				<color>#333333</color>
+				<hOffset>1</hOffset>
+				<vOffset>1</vOffset>
+			</shadow>
+		</text>
+		<text font="Verdana" hOffset="20" vOffset="185" size="10" color="#ffffff" data="Based on Day Planner 2.0.1 which is copyright (c) 2005-2006 Yahoo! Inc.">
+			<shadow>
+				<color>#333333</color>
+				<hOffset>1</hOffset>
+				<vOffset>1</vOffset>
+			</shadow>
+		</text>
+		<text font="Verdana" hOffset="20" vOffset="200" size="10" color="#ffffff" data="My Outlook Today (c) 2006-2009 makoto_kw (makoto.kw@gmail.com)" url="http://projects.makotokw.com/trac/arcadia/wiki/MyOutlookToday">
+			<shadow>
+				<color>#333333</color>
+				<hOffset>1</hOffset>
+				<vOffset>1</vOffset>
+			</shadow>
+		</text>
+	</about-box>
+
+</widget>
